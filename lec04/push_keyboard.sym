@@ -1,0 +1,15 @@
+// Symbol table
+// Scope level 0:
+//	Symbol Name       Page Address
+//	----------------  ------------
+//	LOOP              3000
+//	PUSH_FAIL         3006
+//	PUSH              3007
+//	OVERFLOW          3015
+//	DONE_PUSH         3016
+//	STACK_END         3019
+//	STACK_START       301A
+//	STACK_TOP         301B
+//	SAVE_R3           301C
+//	SAVE_R6           301D
+

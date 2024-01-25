@@ -9,15 +9,13 @@
     ; Approach2: R1<- mem[mam[LB]]
 POLL    LDI     R1, KBSR_ADDR ;R1<- mem[FE00]
         BRzp    POLL
-        LDI     R0, KBDR_ADDR
-        LDI     R2, KBSR_ADDR ;R1<- mem[FE00]
+        LDI     R0, KBDR_ADDR ;R0<- mem[FE02]
+        LDI     R2, KBSR_ADDR ;R2<- mem[FE00]
 
-POLL2    LDI     R1, DSR_ADDR ;R1<- mem[FE00]
+POLL2    LDI     R1, DSR_ADDR ;R1<- mem[FE04]
         BRzp    POLL2
-        STI     R0, DDR_ADDR
-        LDI     R2, DSR_ADDR ;R1<- mem[FE00]
-
-
+        STI     R0, DDR_ADDR ;R0-> mem[FE06]
+        LDI     R2, DSR_ADDR ;R1<- mem[FE04]
 
 KBSR_ADDR      .FILL xFE00
 KBDR_ADDR      .FILL xFE02

@@ -1,0 +1,8 @@
+// Symbol table
+// Scope level 0:
+//	Symbol Name       Page Address
+//	----------------  ------------
+//	FOO               3006
+//	SAVE_R7_FOO       300A
+//	SAVE_R7           300B
+
