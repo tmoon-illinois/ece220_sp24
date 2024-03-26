@@ -1,0 +1,5 @@
+UIN netid GPA
+1 alice 3.2
+2 bob 3.3
+3 cris 2.0
+4 david 4.3
