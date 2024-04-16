@@ -1,4 +1,6 @@
 #include <iostream>
+#include <list>
+
 using namespace std;
 class Vehicle{
     private:
@@ -62,16 +64,19 @@ class Train : public Vehicle{
 
 class City{
     private:
-        Vehicle *vlist[100];
-        int index;
+        // Vehicle *vlist[100];
+        list<Vehicle*> vlist;
+        // int index;
     public:
-        City(){ index = 0;}
+        City(){ }
         void AddVehicle(Vehicle *v){
-            vlist[index++] = v;
+            // vlist[index++] = v;
+            vlist.push_back(v);
         }
         void ShowList(){
-            for(int i=0;i<index;i++)
-                vlist[i]->ShowData();
+            list<Vehicle*>::iterator it;
+            for(it=vlist.begin() ; it != vlist.end(); it++)
+                (*it)->ShowData();
         }
 };
 int main(){
