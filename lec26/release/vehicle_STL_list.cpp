@@ -65,65 +65,29 @@ class Train : public Vehicle{
 class City{
     private:
         list<Vehicle*> vlist;
-        string name;
     public:
         City(){ }
-        City(string name_){
-            name = name_;
-        }
-        City(string name_, list<Vehicle*>vlist_){
-            name = name_;
-            vlist = vlist_;
-        }
-        void setVehicle(Vehicle *v){
-
-        }
         void AddVehicle(Vehicle *v){
             vlist.push_back(v);
         }
         void ShowList(){
-            cout<<name<<endl;
             list<Vehicle*>::iterator it;
             for(it=vlist.begin() ; it != vlist.end(); it++)
                 (*it)->ShowData();
-        }
-        // City operator+(const City &c){
-        //     string temp_name = name + c.name;
-        //     list<Vehicle*>::iterator it;
-        //     list<Vehicle*> temp = c.vlist;
-        //     City temp_city(temp_name); //temp city Chamapgin
-        //     list<Vehicle*> temp2 = vlist;
-        //     for(it = temp.begin(); it != temp.end(); it++){
-        //         temp2.push_back( *it );
-        //     }
-        //     temp_city.vlist = temp2;
-
-        //     return temp_city;
-
-        // }
-        City operator+(const City &c){
-            string temp_name = name + " "+ c.name;
-            list<Vehicle*> temp = c.vlist;
-            list<Vehicle*> temp2 = vlist;
-            list<Vehicle*>::iterator it;
-            for(it = temp.begin(); it != temp.end(); it++){
-                temp2.push_back( *it );
-            }
-            return City(temp_name, temp2);
         }
 };
 int main(){
     City Champaign("Champaign");
     Champaign.AddVehicle(new Airplane(30,100,5));
     Champaign.AddVehicle(new Airplane(10,200,10));
+    Champaign.ShowList();
 
     City Urbana("Urbana");
     Urbana.AddVehicle(new Train(130,300,15));
-
-    City CU = Champaign + Urbana;    // Champaign.operator+(Urbana)
-    CU.ShowList();
-    Champaign.ShowList();
     Urbana.ShowList();
+
+    City CU = Champaign + Urbana;
+    CU.ShowList();
 
 }
 
