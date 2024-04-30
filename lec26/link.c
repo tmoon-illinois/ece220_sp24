@@ -53,13 +53,46 @@ void printitem(item *head){
     }
     printf("\n");
 }
+void insert_sorted(item **headpptr, int val){
+    item *temp = (item*) malloc(sizeof(item));
+    temp->data = val;
+    while(*headpptr &&  (*headpptr)->data < temp->data)
+        headpptr = &((*headpptr)->next);
+
+    temp->next = *headpptr;
+    *headpptr = temp;
+}
+void split(item *head, item **odd_head, item **even_head){
+    item *cur = head;
+    while(cur != NULL){
+        if(cur->data % 2 == 0 ){
+            insert_sorted(even_head, cur->data);
+        }
+        else{
+            insert_sorted(odd_head, cur->data);
+        }
+        cur = cur->next;
+    }
+}
+
+
 int main(){
     // 1. double pointer
     item *head = NULL;
     additem(&head,5);
     additem(&head,10);
-    delete_node(&head, 100);
+    additem(&head,11);
+    additem(&head,12);
+    additem(&head,13);
+    // delete_node(&head, 100);
     printitem(head);
+
+    item *even_head = NULL, *odd_head = NULL;
+    split(head, &odd_head, &even_head);
+    printitem(odd_head);
+    printitem(even_head);
+
+
     // 2. return single pointer
     // item *head = NULL;
     // head = additem(head,5);

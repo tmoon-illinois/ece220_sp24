@@ -32,11 +32,40 @@ int getHeight(t_node *node);
 
 
 int countNeg(t_node *node){
+    // Base case:
+    if(node==NULL)
+        return 0;
+
+    // Recursive case:
+    // add the num of negs from left subtree and right subtree
+    int sum = countNeg(node->left) + countNeg(node->right);
+    // if current node data is negative, return ???
+    if(node->data < 0)
+        return sum+1;
+    else
+        return sum;
 }
 int isSame(t_node *node1, t_node *node2){
+    if(node1==NULL && node2==NULL)
+        return 1;
+    if( (node1==NULL && node2!=NULL) || (node1!=NULL && node2==NULL) )
+        return 0;
+    int isLeftSame = isSame(node1->left, node2->left);
+    int isRightSame = isSame(node1->right, node2->right);
+    if(isLeftSame && isRightSame && node1->data == node2->data)
+        return 1;
+    else
+        return 0;
 }
 
 void mirror(t_node *node){
+    if(node == NULL)
+        return;
+    mirror(node->left);
+    mirror(node->right);
+    t_node *temp = node->left;
+    node->left = node->right;
+    node->right = temp;
 }
 
 int main(){
@@ -46,9 +75,20 @@ int main(){
     root->left = NewNode(2);
     root->right = NewNode(5);
     root->left->left = NewNode(1);
-    root->left->right= NewNode(3);
+    root->left->right= NewNode(-3);
 
     printTree(root, 0);
+
+
+    printf("\n\n\nprint mirror tree:\n");
+    mirror(root);
+    printTree(root, 0);
+
+    t_node *root2 = NewNode(4);
+    printf("Are they same?: %d\n", isSame(root, root2));
+
+    printf("countNeg: %d\n", countNeg(root));
+
     DeleteTree(root);
 }
 
@@ -189,6 +229,8 @@ void padding(char ch, int n)
     for(i=0;i<n;i++)
         putchar(ch);
 }
+
+// print the tree in horizontal way
 void printTree(t_node *node, int level)
 {
     if(node == NULL){
